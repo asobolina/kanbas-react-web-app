@@ -18,6 +18,15 @@
 .env.test.local
 .env.production.local
 
+.idea
+node_modules
+
+# Ignore Visual Studio specific files and directories
+.vscode/
+.vs/
+*.code-workspace
+
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

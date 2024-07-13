@@ -1,3 +1,5 @@
+/* Anastasia Sobolina */
+
 import Lab1 from "./Lab1";
 import { Route, Routes, Navigate } from "react-router";
 import TOC from "./TOC";
@@ -5,7 +7,14 @@ import Lab2 from "./Lab2";
 import Lab3 from "./Lab3";
 export default function Labs() {
     return (
-        <div id="wd-labs">
+        <div>
+            Anastasia Sobolina
+            CS 5610 Summer 2 
+            <p>
+            <a href="https://github.com/asobolina/kanbas-react-web-app.git" target="_blank" rel="noopener noreferrer">
+                GitHub Repository
+            </a>
+            </p>
             <h1>Labs</h1>
             <TOC />
             <Routes>
@@ -14,6 +23,7 @@ export default function Labs() {
                  <Route path="Lab2" element={<Lab2 />} />
                 <Route path="Lab3" element={<Lab3 />} />
             </Routes>
+
         </div>
     );
 }

@@ -2,7 +2,7 @@ import LessonControlButtons from "./LessonControlButtons";
 import ModuleControlButtons from "./ModuleControlButtons";
 import ModulesControls from "./ModulesControls";
 import { BsGripVertical } from "react-icons/bs";
-import "/Users/anastasiasobolina/webdev/kanbas-react-web-app/src/Kanbas/styles.css";
+import "/Users/anastasiasobolina/webdev/kanbas-react-web-app/src/styles.css";
 
 export default function Modules() {
     return (

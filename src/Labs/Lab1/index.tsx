@@ -60,7 +60,9 @@ My favorite books (in no particular order)
 </ul>
 Your favorite books (in no particular order)
 <ul id="wd-your-books">
-  {/* complete on your own */}
+  <li>Master and Margarita</li>
+  <li>Portret of Dorian Grey</li>
+  <li>The Immortal Life of Henrietta Lacks</li>
 </ul>
 </div>
 <div id="wd-tables">

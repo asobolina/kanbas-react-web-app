@@ -1,4 +1,4 @@
-import "/Users/anastasiasobolina/webdev/kanbas-react-web-app/src/styles.css";
+import "../../../styles.css";
 import AssignmentsControls from "./AssignmentsControls";
 import { BsGripVertical } from "react-icons/bs";
 import GreenCheckmark from "./GreenCheckmark";

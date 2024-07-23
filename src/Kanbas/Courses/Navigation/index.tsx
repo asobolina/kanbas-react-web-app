@@ -1,9 +1,14 @@
+import { useParams } from "react-router";
+import { courses } from "../../Database";
 import "./index.css";
 export default function CoursesNavigation() {
+    const { cid } = useParams();
+    const course = courses.find((course) => course._id === cid);
+
   return (
     <div id="wd-courses-navigation" className="list-group fs-5 rounded-0">
 
-      <a id="wd-course-home-link" href="#/Kanbas/Courses/1234/Home"
+      <a id="wd-course-home-link" href={"#/Kanbas/Courses/${course?._id}/Home"}
          className="list-group-item active border border-0"> Home </a>
 
       <a id="wd-course-modules-link" href="#/Kanbas/Courses/1234/Modules"

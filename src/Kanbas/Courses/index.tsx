@@ -3,22 +3,28 @@ import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
-import { Navigate, Route, Routes } from "react-router";
+import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa6";
 import Grades from "./Grades";
+import { courses } from "../Database";
 
 export default function Courses() {
+  const { cid } = useParams();
+  const course = courses.find((course) => course._id === cid);
+  const { pathname } = useLocation();
+  
   return (
-    <div id="wd-courses" className="d-flex">
-      <div className="sidebar">
-        <CoursesNavigation />
+    <div id="wd-courses">
+      <h2 className="text-danger">
+        <FaAlignJustify className="me-4 fs-4 mb-1" />
+        {course && course.name} &gt; {pathname.split("/")[4]}
+      </h2>
+      <hr />
+      <div className="d-flex">
+        <div className="d-none d-mb-block">
+          <CoursesNavigation />
+        </div>
       </div>
-      <div className="content">
-        <h2 className="text-danger">
-          <FaAlignJustify className="me-4 fs-4 mb-1" />
-          Course 1234
-        </h2>
-        <hr />
         <Routes>
           <Route path="/" element={<Navigate to="Home" />} />
           <Route path="Home" element={<Home />} />
@@ -28,7 +34,7 @@ export default function Courses() {
           <Route path="Grades" element={<Grades />} />
         </Routes>
       </div>
-    </div>
+
   );
 }
 

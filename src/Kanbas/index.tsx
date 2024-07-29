@@ -6,7 +6,7 @@ import "../styles.css";
 
 export default function Kanbas() {
   return (
-    <div id="wd-kanbas">
+    <div id="wd-kanbas" className="h-100">
             <KanbasNavigation />
           <div className="wd-main-content-offset p-3">
           <Routes>

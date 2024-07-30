@@ -13,7 +13,8 @@ import {
 import { FaAlignJustify } from "react-icons/fa6";
 import Grades from "./Grades";
 // import { courses } from "../Database";
-
+import store from "../store";
+import { Provider } from "react-redux";
 export default function Courses({ courses }: { courses: any[] }) {
   const param = useParams();
 
@@ -22,29 +23,31 @@ export default function Courses({ courses }: { courses: any[] }) {
 
   const { pathname } = useLocation();
   return (
-    <div id="wd-courses">
-      <h2 className="text-danger">
-        <FaAlignJustify className="me-4 fs-4 mb-1" />
-        {course && course.name} &gt; {pathname.split("/")[4]}
-      </h2>
+    <Provider store={store}>
+      <div id="wd-courses">
+        <h2 className="text-danger">
+          <FaAlignJustify className="me-4 fs-4 mb-1" />
+          {course && course.name} &gt; {pathname.split("/")[4]}
+        </h2>
 
-      <hr />
-      <div className="d-flex">
-        <div className="d-mb-block">
-          <CoursesNavigation />
-        </div>
+        <hr />
+        <div className="d-flex">
+          <div className="d-mb-block">
+            <CoursesNavigation />
+          </div>
 
-        <div className="flex-fill">
-          <Routes>
-            <Route path="/" element={<Navigate to="Home" />} />
-            <Route path="Home" element={<Home />} />
-            <Route path="Modules" element={<Modules />} />
-            <Route path="Assignments" element={<Assignments />} />
-            <Route path="Assignments/:id" element={<AssignmentEditor />} />
-            <Route path="Grades" element={<Grades />} />
-          </Routes>
+          <div className="flex-fill">
+            <Routes>
+              <Route path="/" element={<Navigate to="Home" />} />
+              <Route path="Home" element={<Home />} />
+              <Route path="Modules" element={<Modules />} />
+              <Route path="Assignments" element={<Assignments />} />
+              <Route path="Assignments/:id" element={<AssignmentEditor />} />
+              <Route path="Grades" element={<Grades />} />
+            </Routes>
+          </div>
         </div>
       </div>
-    </div>
+    </Provider>
   );
 }

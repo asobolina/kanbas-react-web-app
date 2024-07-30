@@ -1,8 +1,33 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import * as db from "../../Database";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { addAssignment, updateAssignment } from "./reducer";
 
 export default function AssignmentEditor() {
+  const { id: courseId, assignmentId } = useParams();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [assignment, setAssignment] = useState(
+    assignments.find((a: any) => a._id === assignmentId) || {
+      name: "",
+      description: "",
+      points: 0,
+      dueDate: "",
+      availableFrom: "",
+      availableUntil: "",
+    }
+  );
+
+  const handleSave = () => {
+    if (assignmentId) {
+      dispatch(updateAssignment(assignment));
+    } else {
+      dispatch(addAssignment({ ...assignment, course: courseId }));
+    }
+    navigate(`/courses/${courseId}/assignments`);
+  };
   return (
     <div id="wd-assignments-editor" className="container mt-4">
       <div className="row mb-3">
@@ -13,7 +38,10 @@ export default function AssignmentEditor() {
           <input
             id="wd-name"
             className="form-control"
-            defaultValue="A1 - ENV + HTML"
+            value={assignment.name}
+            onChange={(e) =>
+              setAssignment({ ...assignment, name: e.target.value })
+            }
           />
         </div>
       </div>
@@ -187,12 +215,19 @@ export default function AssignmentEditor() {
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-lg-6">
-          <hr className="my-4" />
+      <div className="row mb-3">
+        <div className="col-lg-12">
           <div className="d-flex justify-content-end">
-            <button className="btn btn-secondary me-2">Cancel</button>
-            <button className="btn btn-primary bg-danger border-danger">
+            <button
+              className="btn btn-secondary me-2"
+              onClick={() => navigate(-1)}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn-primary bg-danger border-danger"
+              onClick={handleSave}
+            >
               Save
             </button>
           </div>

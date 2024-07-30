@@ -10,10 +10,18 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import AssignmentControlButtons from "./AssignmentsControlButtons";
 import { useParams } from "react-router-dom";
 import * as db from "../../Database";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { addAssignment, deleteAssignment, editAssignment } from "./reducer";
+import { BsTrash } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 export default function Assignments() {
   const params = useParams();
-  const assignments = db.assignments;
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
     <div id="wd-assignments">
       <AssignmentsControls />
@@ -50,6 +58,12 @@ export default function Assignments() {
                     <strong> Due</strong> May 13 at 11:59pm | 100 pts
                   </p>
                 </div>
+              </div>
+              <div>
+                <BsTrash
+                  className="text-danger me-2 mb-1"
+                  onClick={() => dispatch(deleteAssignment(assignment._id))}
+                />
               </div>
               <AssignmentControlButtons />
             </li>

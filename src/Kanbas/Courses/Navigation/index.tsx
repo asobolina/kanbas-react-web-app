@@ -1,26 +1,26 @@
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { courses } from "../../Database";
 import "./index.css";
 import { Link, useLocation } from "react-router-dom";
 
-
 export default function CoursesNavigation() {
-    const { cid } = useParams();
-    const course = courses.find((course) => course._id.toLowerCase() === cid);
-    const { pathname } = useLocation();
-    const links = [
-        { label: "Home", path: "Home" },
-        { label: "Modules", path: "Modules" },
-        { label: "Piazza", path: "Piazza" },
-        { label: "Zoom", path: "Zoom" },
-        { label: "Assignments", path: "Assignments" },
-        { label: "Quizzes", path: "Quizzes" },
-        { label: "Grades", path: "Grades" },
-      ];
+  const temp = useParams();
+
+  const course = courses.find((course) => course._id === temp.id);
+  console.log(course);
+  const { pathname } = useLocation();
+  const links = [
+    { label: "Home", path: "Home" },
+    { label: "Modules", path: "Modules" },
+    { label: "Piazza", path: "Piazza" },
+    { label: "Zoom", path: "Zoom" },
+    { label: "Assignments", path: "Assignments" },
+    { label: "Quizzes", path: "Quizzes" },
+    { label: "Grades", path: "Grades" },
+  ];
   return (
     <div id="wd-courses-navigation" className="list-group fs-5 rounded-0">
-
-{links.map((link) => (
+      {links.map((link) => (
         <a
           key={link.path}
           href={`#/Kanbas/Courses/${course?._id}/${link.path}`}
@@ -32,6 +32,5 @@ export default function CoursesNavigation() {
         </a>
       ))}
     </div>
-
   );
 }

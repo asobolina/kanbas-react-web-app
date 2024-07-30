@@ -10,28 +10,28 @@ import DateStateVariable from "./DateStateVariables";
 import ObjectStateVariable from "./ObjectStateVariable";
 import ArrayStateVariable from "./ArrayStateVariables";
 import ParentStateComponent from "./PatentStateComponent";
+import ReduxExamples from "./ReduxExamples";
 
 export default function Lab4() {
+  function sayHello() {
+    alert("Hello");
+  }
 
-    function sayHello() {
-        alert("Hello");
-      }
-    
-
-    return (
-        <div id="wd-a4">
-            <h2>Lab 4</h2>
-            <ClickEvent />
-            <PassingDataOnEvent />
-            <PassingFunctions theFunction={sayHello} />
-            <EventObject />
-            <Counter />
-            <BooleanStateVariables />
-            <StringStateVariables />
-            <DateStateVariable />
-            <ObjectStateVariable />
-            <ArrayStateVariable />
-            <ParentStateComponent />
-        </div>
-    );
+  return (
+    <div id="wd-a4">
+      <h2>Lab 4</h2>
+      <ClickEvent />
+      <PassingDataOnEvent />
+      <PassingFunctions theFunction={sayHello} />
+      <EventObject />
+      <Counter />
+      <BooleanStateVariables />
+      <StringStateVariables />
+      <DateStateVariable />
+      <ObjectStateVariable />
+      <ArrayStateVariable />
+      <ParentStateComponent />
+      <ReduxExamples />
+    </div>
+  );
 }

@@ -18,6 +18,7 @@ export default function ModulesControls({
         className="btn btn-lg btn-danger me-1 float-end"
         data-bs-toggle="modal"
         data-bs-target="#wd-add-module-dialog"
+        onClick={() => addModule()}
       >
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Module

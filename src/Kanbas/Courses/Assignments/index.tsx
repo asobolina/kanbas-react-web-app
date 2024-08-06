@@ -12,15 +12,29 @@ import { useParams } from "react-router-dom";
 import * as db from "../../Database";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addAssignment, deleteAssignment, editAssignment } from "./reducer";
+import { addAssignment, deleteAssignment, updateAssignment } from "./reducer";
 import { BsTrash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import AssignmentEditor from "./Editor";
 
 export default function Assignments() {
   const params = useParams();
+  const courseId = params.id;
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [selectedAssignment, setSelectedAssignment] = useState<string | null>(
+    null
+  );
+
+  // const confirmDelete = () => {
+  //   if (selectedAssignment) {
+  //     dispatch(deleteAssignment(selectedAssignment));
+  //     setSelectedAssignment(null);
+  //   }
+  // };
 
   return (
     <div id="wd-assignments">
@@ -45,7 +59,12 @@ export default function Assignments() {
           .filter((assignment: any) => assignment.course === params.id)
           .map((assignment: any) => (
             <li className="list-group-item d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-center">
+              <div
+                className="d-flex align-items-center"
+                onClick={() =>
+                  navigate(`/Courses/${courseId}/Assignments/${assignment._id}`)
+                }
+              >
                 <BsGripVertical className="me-2 fs-3" />
                 <PiNotebook className="me-2 fs-3 text-success" />
                 <div>

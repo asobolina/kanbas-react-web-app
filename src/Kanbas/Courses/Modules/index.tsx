@@ -6,7 +6,7 @@ import "../../../styles.css";
 import { useParams } from "react-router-dom";
 import { modules } from "../../Database";
 import * as db from "../../Database";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addModule, editModule, updateModule, deleteModule } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -16,6 +16,7 @@ export default function Modules() {
   const [moduleName, setModuleName] = useState("");
   const { modules } = useSelector((state: any) => state.modulesReducer);
   const dispatch = useDispatch();
+  useEffect(() => {}, [modules]);
   // const addModule = () => {
   //   setModules([
   //     ...modules,

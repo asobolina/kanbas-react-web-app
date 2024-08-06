@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { addAssignment, updateAssignment } from "./reducer";
 
 export default function AssignmentEditor() {
@@ -8,6 +8,7 @@ export default function AssignmentEditor() {
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
 
   const [assignment, setAssignment] = useState(
     assignments.find((a: any) => a._id === assignmentId) || {
@@ -218,18 +219,21 @@ export default function AssignmentEditor() {
       <div className="row mb-3">
         <div className="col-lg-12">
           <div className="d-flex justify-content-end">
-            <button
+            <Link
+              to={`/Kanbas/Courses/${params.id}/Assignments`}
+              id="wd-cancel"
               className="btn btn-secondary me-2"
-              onClick={() => navigate(-1)}
             >
               Cancel
-            </button>
-            <button
-              className="btn btn-primary bg-danger border-danger"
+            </Link>
+            <Link
+              to={`/Kanbas/Courses/${params.id}/Assignments`}
+              id="wd-save"
+              className="btn btn-success"
               onClick={handleSave}
             >
               Save
-            </button>
+            </Link>
           </div>
         </div>
       </div>

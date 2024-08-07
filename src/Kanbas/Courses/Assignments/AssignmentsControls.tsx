@@ -37,7 +37,7 @@ export default function AssignmentsControls() {
       <button
         id="wd-add-assignment-btn"
         className="btn btn-lg btn-danger me-1 float-end"
-        onClick={() => navigate(`/Courses/${params.id}/Assignments/Editor.tsx`)}
+        onClick={() => navigate(`/Kanbas/Courses/${params.id}/Assignments/new`)}
       >
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Assignment

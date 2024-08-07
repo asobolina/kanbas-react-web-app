@@ -47,7 +47,7 @@ export default function Modules() {
         setModuleName={setModuleName}
         moduleName={moduleName}
         addModule={() => {
-          dispatch(addModule({ name: moduleName, course: param }));
+          dispatch(addModule({ name: moduleName, course: param.id }));
           setModuleName("");
         }}
       />

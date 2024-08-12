@@ -12,15 +12,50 @@ import { useParams } from "react-router-dom";
 import * as db from "../../Database";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addAssignment, deleteAssignment, editAssignment } from "./reducer";
+import {
+  addAssignment,
+  deleteAssignment,
+  editAssignment,
+  setAssignment,
+} from "./reducer";
 import { BsTrash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import * as client from "./client";
+import { useState, useEffect } from "react";
+import { fetchAssignment } from "../../../Labs/Lab5/client";
 
 export default function Assignments() {
   const params = useParams();
+  const { cid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const removeAssignment = async (assignmentId: string) => {
+    await client.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
+
+  const fetchAssignment = async () => {
+    const modules = await client.findAssignmentsForModule(cid as string);
+    dispatch(setAssignment(assignments));
+  };
+  useEffect(() => {
+    fetchAssignment();
+  }, []);
+
+  const createAssignment = async (module: any) => {
+    const newAssignment = await client.createAssignment(
+      cid as string,
+      assignments
+    );
+    dispatch(addAssignment(newAssignment));
+  };
+
+  const removeAssignment = async (assignmentId: string) => {
+    await client.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
 
   return (
     <div id="wd-assignments">
@@ -62,7 +97,10 @@ export default function Assignments() {
               <div>
                 <BsTrash
                   className="text-danger me-2 mb-1"
-                  onClick={() => dispatch(deleteAssignment(assignment._id))}
+                  assignmentId={assignment._id}
+                  onClick={() => {
+                    removeAssignment(assignmentId);
+                  }}
                 />
               </div>
               <AssignmentControlButtons />

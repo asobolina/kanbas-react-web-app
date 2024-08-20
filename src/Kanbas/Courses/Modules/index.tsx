@@ -92,7 +92,7 @@ export default function Modules() {
 
       <ul id="wd-modules" className="list-group rounded-0">
         {modules
-          .filter((module: any) => module.course === param.id)
+          .filter((module: any) => module.course === param.cid)
           .map((module: any) => (
             <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
               <div className="wd-title p-3 ps-2 bg-secondary">

@@ -29,22 +29,24 @@ export default function Assignments() {
   const { cid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const removeAssignment = async (assignmentId: string) => {
-    await client.deleteAssignment(assignmentId);
-    dispatch(deleteAssignment(assignmentId));
-  };
+  const [selectedAssignment, setSelectedAssignment] = useState<{
+    id: string;
+    title: string;
+  } | null>(null);
+  // const removeAssignment = async (assignmentId: string) => {
+  //   await client.deleteAssignment(assignmentId);
+  //   dispatch(deleteAssignment(assignmentId));
+  // };
 
   const fetchAssignment = async () => {
-    const modules = await client.findAssignmentsForModule(cid as string);
+    const assignments = await client.findAssignmentsForCourse(cid as string);
     dispatch(setAssignment(assignments));
   };
   useEffect(() => {
     fetchAssignment();
   }, []);
 
-  const createAssignment = async (module: any) => {
+  const createAssignment = async (assignment: any) => {
     const newAssignment = await client.createAssignment(
       cid as string,
       assignments
@@ -57,6 +59,18 @@ export default function Assignments() {
     dispatch(deleteAssignment(assignmentId));
   };
 
+  const saveAssignment = async (assignment: any) => {
+    const status = await client.updateAssignment(assignment);
+    dispatch(await client.updateAssignment(assignment));
+  };
+
+  // const removeAssignment = async (assignmentId: string) => {
+  //   await client.deleteAssignment(assignmentId);
+  //   dispatch(deleteAssignment(assignmentId));
+  // };
+  console.log(params.id);
+  console.log(cid);
+  console.log(typeof params.id);
   return (
     <div id="wd-assignments">
       <AssignmentsControls />
@@ -79,7 +93,10 @@ export default function Assignments() {
         {assignments
           .filter((assignment: any) => assignment.course === params.id)
           .map((assignment: any) => (
-            <li className="list-group-item d-flex justify-content-between align-items-center">
+            <li
+              key={assignment._id}
+              className="list-group-item d-flex justify-content-between align-items-center"
+            >
               <div className="d-flex align-items-center">
                 <BsGripVertical className="me-2 fs-3" />
                 <PiNotebook className="me-2 fs-3 text-success" />
@@ -96,11 +113,12 @@ export default function Assignments() {
               </div>
               <div>
                 <BsTrash
-                  className="text-danger me-2 mb-1"
-                  assignmentId={assignment._id}
-                  onClick={() => {
-                    removeAssignment(assignmentId);
-                  }}
+
+                // className="text-danger me-2 mb-1"
+                // assignmentId={assignment._id}
+                // onClick={() => {
+                //   removeAssignment(assignmentId);
+                // }}
                 />
               </div>
               <AssignmentControlButtons />
